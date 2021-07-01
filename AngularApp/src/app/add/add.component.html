@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label" for="name">Nome</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input" id="name" type="text" formControlName="name" required />
+        </div>
+        <p *ngIf="nameControl && nameControl.invalid && nameControl.touched && nameControl.dirty" class="help is-danger">Digite o nome do empregado(a)</p>
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <p class="label">Bebida</p>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="drink" value="true" required checked formControlName="drink" />
+            Sim
+          </label>
+          <label class="radio">
+            <input type="radio" name="drink" value="false" required formControlName="drink" />
+            Não
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <div class="buttons">
+            <input [disabled]="!form.valid" type="submit" value="Adicionar" class="button is-primary" />
+            <button (click)="cancel()" class="button is-light">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

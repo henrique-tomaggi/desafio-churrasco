@@ -1,0 +1,36 @@
+<h1 class="title">Lista de participantes</h1>
+<table class="is-striped table is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th colspan="3">Empregado(a)</th>
+      <th colspan="3">Convidado(a)</th>
+    </tr>
+    <tr>
+      <th>Nome</th>
+      <th>Bebida</th>
+      <th></th>
+      <th>Nome</th>
+      <th>Bebida</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.name}}</td>
+      <td>{{employee.drink ? "Sim" : "Não"}}</td>
+      <td><a class="button is-danger" routerLink="../remove/{{employee.id}}">Remover</a></td>
+      <ng-container *ngIf="findGuest(employee.guestId) as guest; else withoutGuest">
+        <td>{{guest.name}}</td>
+        <td>{{guest.drink ? "Sim" : "Não"}}</td>
+        <td><a class="button is-danger" routerLink="../cancel/{{guest.id}}">Remover</a></td>
+      </ng-container>
+      <ng-template #withoutGuest>
+        <td colspan="3"><a class="button is-primary" routerLink="../invite/{{employee.id}}">Convidar</a></td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+<a class="button is-link" routerLink="../add">Adicionar</a>
+<ng-container *ngIf="loadComplete">
+  <summary [context]="map"></summary>
+</ng-container>
